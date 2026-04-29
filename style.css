@@ -1,102 +1,251 @@
+/* =========================
+RESET + BASE
+========================= */
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #222;
 }
 
 h1,
-h2 {
+h2,
+h3 {
     font-family: 'Playfair Display', serif;
-}
-
-.hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    position: relative;
-    padding: 3rem;
-    gap: 2rem;
-}
-
-.hero-image {
-    z-index: 2;
-}
-
-.hero-image img {
-    width: 100%;
-    max-width: 300px;
-    display: block;
-    transform: translateY(40px)
-}
-
-.hero-content {
-    background: white;
-    padding: 2rem;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.hero {
-    background: linear-gradient(135deg, teal 50%, white 50%);
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(1fr);
-    gap: 2rem;
-}
-
-.card {
-    background: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.contact {
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 2rem;
-    background-color: lightskyblue;
-}
-
-.card-image {
-    height: 150px;
-    background: red;
-    /* placeholder */
-}
-
-.projectDetails {
-    padding: 1rem;
-}
-
-.project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 section {
     padding: 3rem 1.5rem;
 }
 
-h2 {
-    margin-bottom: 1.5rem;
+/* =========================
+HERO SECTION
+========================= */
+.hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 4rem 1.5rem 3rem;
+    overflow: hidden;
 }
 
-/* Tablet */
+/* angled background */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: teal;
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 0 90%);
+    z-index: 0;
+}
+
+/* NAME (fixed issue here) */
+.hero-name {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2.2rem;
+    z-index: 5;
+    /* higher than everything */
+    pointer-events: none;
+}
+
+/* image */
+.hero-image {
+    position: relative;
+    z-index: 2;
+    transform: translateY(30px);
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 260px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* content */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    background: white;
+    padding: 1.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-10px);
+}
+
+.hero-content h2 {
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    margin-bottom: 1rem;
+}
+
+/* =========================
+PROJECTS
+========================= */
+.projects h2 {
+    margin-bottom: 2rem;
+}
+
+/* FIXED GRID */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* CARD */
+.card {
+    background: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* hover polish */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* image section */
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+/* content */
+.projectDetails {
+    padding: 1rem;
+}
+
+/* header row */
+.projectDetails button {
+    all: unset;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* layout row */
+.projectDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* icon alignment */
+.projectDetails a {
+    align-self: flex-end;
+}
+
+/* =========================
+CONTACT
+========================= */
+.contact {
+    background: teal;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.contact-info {
+    max-width: 500px;
+}
+
+.contact-info h3 {
+    margin-bottom: 1rem;
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* =========================
+TABLET
+========================= */
 @media (min-width: 768px) {
+
+    .hero {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+
+    .hero-name {
+        top: 30px;
+        font-size: 2.5rem;
+    }
+
+    .hero-image {
+        transform: translateY(50px);
+    }
+
+    .hero-content {
+        transform: translateY(-30px);
+    }
+
+    /* FIX: projects now 2 columns */
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .contact {
-        display: grid;
         grid-template-columns: 1fr 1fr;
+        align-items: center;
     }
 }
 
-/* Desktop */
+/* =========================
+DESKTOP
+========================= */
 @media (min-width: 1024px) {
+
+    .hero {
+        padding: 5rem 6rem;
+    }
+
+    .hero-name {
+        left: 55%;
+        font-size: 3rem;
+    }
+
+    .hero-image img {
+        max-width: 360px;
+    }
+
+    .hero-content {
+        padding: 2rem;
+    }
+
+    /* FIX: projects now 3 columns */
     .projects-grid {
         grid-template-columns: repeat(3, 1fr);
     }
